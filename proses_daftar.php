@@ -7,16 +7,16 @@ include 'koneksi.php';
   $nim           = $_POST['nim'];
   $jeniskelamin  = $_POST['jeniskelamin'];
   $alamat        = $_POST['alamat'];
+  $email         = $_POST['email'];
   $jurusan       = $_POST['jurusan'];
   $fakultas      = $_POST['fakultas'];
-  $email         = $_POST['email'];
   $posisi        = $_POST['posisi'];
   $gambar        = $_FILES['gambar']['name'];
 
 
 //cek dulu jika ada gambar produk jalankan coding ini
 if($gambar != "") {
-  $ekstensi_diperbolehkan = array('png','jpg','jpeg'); //ekstensi file gambar yang bisa diupload 
+  $ekstensi_diperbolehkan = array('png','jpg'); //ekstensi file gambar yang bisa diupload 
   $x = explode('.', $gambar); //memisahkan nama file dengan ekstensi yang diupload
   $ekstensi = strtolower(end($x));
   $file_tmp = $_FILES['gambar']['tmp_name'];   
@@ -35,12 +35,12 @@ if($gambar != "") {
                   } else {
                     //tampil alert dan akan redirect ke halaman index.php
                     //silahkan ganti index.php sesuai halaman yang akan dituju
-                    echo "<script>alert('Data berhasil ditambah.');window.location='halaman_admin.php';</script>";
+                    echo "<script>alert('Data berhasil ditambah.');window.location='halaman_pegawai.php';</script>";
                   }
 
             } else {     
              //jika file ekstensi tidak jpg dan png maka alert ini yang tampil
-                echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='tambah.php';</script>";
+                echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='daftar_pegawai.php';</script>";
             }
 } else {
    $query = "INSERT INTO pegawai (nama, nim, jeniskelamin, alamat, jurusan, fakultas, email, posisi, gambar) VALUES ('$nama', '$nim', '$jeniskelamin', '$alamat', '$jurusan', '$fakultas', '$email',     
@@ -53,7 +53,7 @@ if($gambar != "") {
                   } else {
                     //tampil alert dan akan redirect ke halaman index.php
                     //silahkan ganti index.php sesuai halaman yang akan dituju
-                    echo "<script>alert('Data berhasil ditambah.');window.location='halaman_admin.php';</script>";
+                    echo "<script>alert('Data berhasil ditambah.');window.location='halaman_pegawai.php';</script>";
                   }
 }
 

@@ -1,64 +1,159 @@
-	
-<?php 
- 
- include 'config.php';
-  
- error_reporting(0);
-  
- session_start();
-  
- if (isset($_SESSION['username'])) {
-     header("Location: berhasil_login.php");
- }
-  
- if (isset($_POST['submit'])) {
-     $email = $_POST['email'];
-     $password = md5($_POST['password']);
-  
-     $sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
-     $result = mysqli_query($conn, $sql);
-     if ($result->num_rows > 0) {
-         $row = mysqli_fetch_assoc($result);
-         $_SESSION['username'] = $row['username'];
-         header("Location: berhasil_login.php");
-     } else {
-         echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
-     }
- }
-  
- ?>
-  
- <!DOCTYPE html>
- <html>
- <head>
-     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
-     <link rel="stylesheet" type="text/css" href="style.css">
-  
-     <title>DATA MAHASISWA UNIVERSITY OF TORONTO</title>
- </head>
- <body background="ku.jpeg">
-     <div class="alert alert-warning" role="alert">
-         <?php echo $_SESSION['error']?>
-     </div>
-  
-     <div class="container">
-         <form action="" method="POST" class="login-email">
-             <p class="login-text" style="font-size: 2rem; font-weight: 800;">Login</p>
-             <div class="input-group">
-                 <input type="email" placeholder="Email" name="email" value="<?php echo $email; ?>" required>
-             </div>
-             <div class="input-group">
-                 <input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required>
-             </div>
-             <div class="input-group">
-                 <button name="submit" class="btn">Login</button>
-             </div>
-             <p class="login-register-text">Anda belum punya akun? <a href="register.php">Register</a></p>
-         </form>
-     </div>
- </body>
- </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Koperasi</title>
+    <link href="gambar/uin.jpeg" rel="shortcut icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        @keyframes coinAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('gambar/uin2.jpeg') fixed;
+            background-size: cover;
+            animation: coinAnimation 2s infinite; /* Sesuaikan durasi dan propertinya jika perlu */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px #000000;
+            padding: 20px;
+            font-size: 24px;
+        }
+
+        .alert {
+            background-color: #ff6347;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .kotak_login {
+            width: 300px;
+            background: #ffffff;
+            margin: 80px auto;
+            padding: 30px 20px;
+            box-shadow: 0px 0px 10px 0px #000000;
+            position: relative;
+        }
+
+        .tulisan_login {
+            text-align: center;
+            color: #4caf50;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .label {
+            color: #4caf50;
+        }
+
+        .form_login {
+            width: 100%;
+            padding: 7px;
+            margin: 5px 0 20px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .tombol_login {
+            background: #4caf50;
+            color: #ffffff;
+            padding: 7px;
+            font-size: 15px;
+            border: 0;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .tombol_login:hover {
+            background: #45a049;
+        }
+
+        .link {
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .star {
+            color: #ffd700;
+            font-size: 30px;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .kopma-logo {
+            width: 250px;
+            height: 130px;
+            display: block;
+            margin: 10px auto;
+        }
+        .tombol_register {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .tombol_register a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .tombol_register a:hover {
+            color: #3498db;
+        }
+
+    </style>
+</head>
+<body>
+
+    <?php 
+    if(isset($_GET['pesan'])){
+        if($_GET['pesan']=="gagal"){
+            echo "<div class='alert'>Username dan Password tidak sesuai !</div>";
+        }
+    }
+    ?>
+
+    <div class="kotak_login">
+        <img src="gambar/kopma.jpeg" alt="Kopma Logo" class="kopma-logo">
+        <p class="tulisan_login">Silahkan login</p>
+
+        <form action="cek_login.php" method="post">
+            <label class="label">Username</label>
+            <input type="text" name="username" class="form_login" placeholder="Username .." required="required">
+
+            <label class="label">Password</label>
+            <input type="password" name="password" class="form_login" placeholder="Password .." required="required">
+
+            <button type="submit" class="btn btn-primary btn-block tombol_login">LOGIN</button>
+        </form>
+        <div class="tombol_register">
+            <p>Belum punya akun? <a href="register.php">Register</a></p>
+        </div>
+    </div>
+</br>
+</body>
+</html>

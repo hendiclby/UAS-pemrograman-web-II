@@ -4,15 +4,11 @@ include 'koneksi.php';
 
 	// membuat variabel untuk menampung data dari form
   $id = $_POST['id'];
-  $nama           = $_POST['nama'];
-  $nim            = $_POST['nim'];
-  $jeniskelamin   = $_POST['jeniskelamin'];
-  $alamat         = $_POST['alamat'];
-  $jurusan        = $_POST['jurusan'];
-  $fakultas       = $_POST['fakultas'];
-  $email          = $_POST['email'];
-  $posisi         = $_POST['posisi'];
-  $gambar         = $_FILES['gambar']['name'];
+  $namausaha          = $_POST['namausaha'];
+  $jenisusaha         = $_POST['jenisusaha'];
+  $tanggaldidirikan   = $_POST['tanggaldidirikan'];
+  $lokasi             = $_POST['lokasi'];
+  $gambar        = $_FILES['gambar']['name'];
   //cek dulu jika merubah gambar produk jalankan coding ini
   if($gambar != "") {
     $ekstensi_diperbolehkan = array('png','jpg','jpeg'); //ekstensi file gambar yang bisa diupload 
@@ -25,7 +21,7 @@ include 'koneksi.php';
                   move_uploaded_file($file_tmp, 'gambar/'.$nama_gambar_baru); //memindah file gambar ke folder gambar
                       
                     // jalankan query UPDATE berdasarkan ID yang produknya kita edit
-                   $query  = "UPDATE pegawai SET nama = '$nama', nim = '$nim', jeniskelamin = '$jeniskelamin', alamat = '$alamat', jurusan = '$jurusan', fakultas = '$fakultas', email = '$email', posisi = '$posisi', gambar = '$nama_gambar_baru'";
+                   $query  = "UPDATE usaha SET namausaha = '$namausaha', jenisusaha = '$jenisusaha', tanggaldidirikan = '$tanggaldidirikan', lokasi = '$lokasi', gambar = '$nama_gambar_baru'";
                     $query .= "WHERE id = '$id'";
                     $result = mysqli_query($koneksi, $query);
                     // periska query apakah ada error
@@ -35,16 +31,16 @@ include 'koneksi.php';
                     } else {
                       //tampil alert dan akan redirect ke halaman index.php
                       //silahkan ganti index.php sesuai halaman yang akan dituju
-                      echo "<script>alert('Data berhasil diubah.');window.location='halaman_admin.php';</script>";
+                      echo "<script>alert('Data berhasil diubah.');window.location='usaha2.php';</script>";
                     }
               } else {     
                //jika file ekstensi tidak jpg dan png maka alert ini yang tampil
-                  echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='edit.php';</script>";
+                  echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='edit_usaha.php';</script>";
               }
     } else {
       // jalankan query UPDATE berdasarkan ID yang produknya kita edit
-      $query  = "UPDATE pegawai SET nama = '$nama', nim = '$nim', jeniskelamin = '$jeniskelamin', alamat = 
-      '$alamat', jurusan = '$jurusan', fakultas = '$fakultas', email = '$email', posisi = '$posisi'";
+      $query  = "UPDATE usaha SET namausaha = '$namausaha', jenisusaha = '$jenisusaha', tanggaldidirikan = '$tanggaldidirikan', lokasi = 
+      '$lokasi'";
       $query .= "WHERE id = '$id'";
       $result = mysqli_query($koneksi, $query);
       // periska query apakah ada error
@@ -54,7 +50,7 @@ include 'koneksi.php';
       } else {
         //tampil alert dan akan redirect ke halaman index.php
         //silahkan ganti index.php sesuai halaman yang akan dituju
-          echo "<script>alert('Data berhasil diubah.');window.location='halaman_admin.php';</script>";
+          echo "<script>alert('Data berhasil diubah.');window.location='usaha2.php';</script>";
       }
     }
 

@@ -45,25 +45,23 @@
       <thead>
         <tr>
           <th colspan="10" style=background-color:blue width="00"><center>
-<font size=3 font=calibri color=white> Data Pegawai </th>
+<font size=3 font=calibri color=white> Data Keuangan </th>
         </tr>
         <tr>
           <th>No</th>
-          <th>Nama</th>
-          <th>NIM</th>
-          <th>Jenis Kelamin</th>
-          <th>Alamat</th>
-          <th>Jurusan</th>
-          <th>Fakultas</th>
-          <th>Email</th>
-          <th>Posisi</th>
-          <th>Gambar</th>
+          <th>Keterangan</th>
+          <th>Januari</th>
+          <th>Februari</th>
+          <th>Maret</th>
+          <th>April</th>
+          <th>Mei</th>
+          <th>Juni</th>
         </tr>
     </thead>
     <tbody>
       <?php
       // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-      $query = "SELECT * FROM pegawai ORDER BY id ASC";
+      $query = "SELECT * FROM keuangan ORDER BY id ASC";
       $result = mysqli_query($koneksi, $query);
       //mengecek apakah ada error ketika menjalankan query
       if(!$result){
@@ -80,15 +78,13 @@
       ?>
        <tr>
           <td><?php echo $no; ?></td>
-          <td><?php echo $row['nama']; ?></td>
-          <td><?php echo $row['nim']; ?></td>
-          <td><?php echo $row['jeniskelamin']; ?></td>
-          <td><?php echo $row['alamat']; ?></td>
-          <td><?php echo $row['jurusan']; ?></td>
-          <td><?php echo $row['fakultas']; ?></td>
-          <td><?php echo $row['email']; ?></td>
-          <td><?php echo $row['posisi']; ?></td>
-          <td style="text-align: center;"><img src="gambar/<?php echo $row['gambar']; ?>" style="width: 120px;"></td>
+          <td><?php echo $row['keterangan']; ?></td>
+          <td>Rp<?php echo $row['januari']; ?></td>
+          <td>Rp<?php echo $row['februari']; ?></td>
+          <td>Rp<?php echo $row['maret']; ?></td>
+          <td>Rp<?php echo $row['april']; ?></td>
+          <td>Rp<?php echo $row['mei']; ?></td>
+          <td>Rp<?php echo $row['juni']; ?></td>
       </tr>   
       <?php
         $no++; //untuk nomor urut terus bertambah 1

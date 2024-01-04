@@ -45,25 +45,21 @@
       <thead>
         <tr>
           <th colspan="10" style=background-color:blue width="00"><center>
-<font size=3 font=calibri color=white> Data Pegawai </th>
+<font size=3 font=calibri color=white> Data Usaha </th>
         </tr>
         <tr>
           <th>No</th>
-          <th>Nama</th>
-          <th>NIM</th>
-          <th>Jenis Kelamin</th>
-          <th>Alamat</th>
-          <th>Jurusan</th>
-          <th>Fakultas</th>
-          <th>Email</th>
-          <th>Posisi</th>
+          <th>Nama Usaha</th>
+          <th>Jenis Usaha</th>
+          <th>Tanggal Didirikan</th>
+          <th>Lokasi</th>
           <th>Gambar</th>
         </tr>
     </thead>
     <tbody>
       <?php
       // jalankan query untuk menampilkan semua data diurutkan berdasarkan nim
-      $query = "SELECT * FROM pegawai ORDER BY id ASC";
+      $query = "SELECT * FROM usaha ORDER BY id ASC";
       $result = mysqli_query($koneksi, $query);
       //mengecek apakah ada error ketika menjalankan query
       if(!$result){
@@ -80,14 +76,10 @@
       ?>
        <tr>
           <td><?php echo $no; ?></td>
-          <td><?php echo $row['nama']; ?></td>
-          <td><?php echo $row['nim']; ?></td>
-          <td><?php echo $row['jeniskelamin']; ?></td>
-          <td><?php echo $row['alamat']; ?></td>
-          <td><?php echo $row['jurusan']; ?></td>
-          <td><?php echo $row['fakultas']; ?></td>
-          <td><?php echo $row['email']; ?></td>
-          <td><?php echo $row['posisi']; ?></td>
+          <td><?php echo $row['namausaha']; ?></td>
+          <td><?php echo $row['jenisusaha']; ?></td>
+          <td><?php echo $row['tanggaldidirikan']; ?></td>
+          <td><?php echo $row['lokasi']; ?></td>
           <td style="text-align: center;"><img src="gambar/<?php echo $row['gambar']; ?>" style="width: 120px;"></td>
       </tr>   
       <?php
